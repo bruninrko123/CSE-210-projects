@@ -42,12 +42,12 @@ class Program
 
         // add the + or - or nothing to the letter
         int signTester = gradePercentage % 10;
-        if (signTester >= 7)
+        if (signTester >= 7 && letter != "A" && letter != "F")
         {
             letter = letter + "+";
         }
 
-        else if (signTester <= 3)
+        else if (signTester <= 3 && letter != "F")
         {
             letter = letter + "-";
         }
