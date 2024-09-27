@@ -1,0 +1,55 @@
+what does the program do?  It is a journal
+
+what user input does it have?
+a: 
+Input from the system: The program loads the journal from a file.
+Random input: The system randomly generates a prompt
+Input form the user: All entries from the Display method.
+
+What output does it produce?
+Display: the program displays all entries that are in the journal
+Save: The program saves the entries into a file.
+
+How does the program end?
+When the user chooses option 5 on the menu.
+
+
+
+Journal
+
+ _entries: List<string>
+
+    AddEntry(entry: Entry): void
+
+    DisplayEntries(): void
+
+    SaveFile(fileName: string): void
+
+    LoadFile(filePath: string): void
+ 
+
+Entry 
+
+ _answer: string
+
+ _question: string
+
+ _date: string
+
+    DisplayEntry(): void
+
+Prompt
+
+ _prompts: List<string>
+
+
+ GenerateRandomPrompt(): string
+
+
+
+
+
+
+
+
+
