@@ -5,8 +5,22 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Hello Develop03 World!");
-         Random random = new Random();
-        int randomNumber  = random.Next(0,3);
-        Console.WriteLine(randomNumber);
+
+        Reference r1 = new Reference();
+        r1.displayReference();
+        Scripture s1 = new Scripture();
+        s1.displayScripture();
+
+        Reference r2 = new Reference("John", "3", "17");
+        r2.displayReference();
+
+        Reference r3 = new Reference("Proverbs", "3", "5", "6");
+        r3.displayReference();
+
+
+        Scripture hiding = new Scripture();
+        hiding.Hide();
+
+
     }
 }
