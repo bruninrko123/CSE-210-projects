@@ -20,6 +20,8 @@ class Program
         Console.WriteLine("3.Load");
         Console.WriteLine("4.Save");
         Console.WriteLine("5.Quit");
+        
+        menuChoice = int.Parse(Console.ReadLine());
 
         
 
@@ -30,9 +32,6 @@ class Program
         Console.WriteLine();
 
 
-
-
-
         // print the prompt on the screen
         PromptGenerator printprompt = new PromptGenerator();
       
@@ -40,14 +39,9 @@ class Program
 
 
 
-
-
-
-
-
         //get entries
-        Entry newEntry = new Entry();
         string answer = Console.ReadLine();
+        Entry newEntry = new Entry();
         newEntry._entryText = answer;
 
         DateTime currentDate = DateTime.Now;
@@ -85,24 +79,23 @@ class Program
       }
 
       else if (menuChoice == 3)
-      {
+      { 
+        Console.Write("What is the name of the fiel to read? ");
         string fileToBeRead = Console.ReadLine();
-        string[] lines = System.IO.File.ReadAllLines(fileToBeRead);
-
-        foreach (string line in lines)
-        {
-          string[] parts = line.Split(",");
-
-
-        }
+        Journal read = new Journal();
+        read.LoadFromFile(fileToBeRead);
+        
       }
+    
 
 
       else if (menuChoice == 4)
-      {
+      {   
+          Console.WriteLine("qual e o nome do arquivo? ");
           string nameOfTheFile = Console.ReadLine();
           Journal save = new Journal();
           save.SaveToFile(nameOfTheFile);
+      
 
 
         
@@ -112,14 +105,13 @@ class Program
 
 
 
-
+    }
         //pular linha denovo
         Console.WriteLine();
-      }
     }
+}
  
     
       
 
         
-}
