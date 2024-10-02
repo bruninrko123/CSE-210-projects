@@ -17,6 +17,9 @@ class Program
         Reference r3 = new Reference("Proverbs", "3", "5", "6");
         r3.displayReference();
 
+        //define which scripture to use
+        Scripture scripture = new Scripture();
+
 
         Scripture hiding = new Scripture();
         hiding.Hide();

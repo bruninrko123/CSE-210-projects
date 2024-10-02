@@ -4,7 +4,10 @@ public class Journal
 {
     public  List<Entry> _entries = new List<Entry>() ;
 
-
+public Journal()
+{
+  
+}
 
     public void AddEntry(Entry newEntry)
     {
@@ -15,6 +18,7 @@ public class Journal
         //string message = data + "--" + pergunta + "\n" + resposta;
 
        _entries.Add(newEntry);
+        Console.Write("This is the lenght of the list: ");
         Console.WriteLine(_entries.Count);
         //Console.WriteLine($"{message}");
         Console.WriteLine($"{_entries}");

@@ -41,15 +41,14 @@ class Program
 
         //get entries
         string answer = Console.ReadLine();
-        Entry newEntry = new Entry();
-        newEntry._entryText = answer;
+        
 
         DateTime currentDate = DateTime.Now;
         string formattedDate = currentDate.ToString();
         
-        newEntry._date = formattedDate;
+        Entry newEntry = new Entry(formattedDate, Question, answer);
 
-        newEntry._promptText = Question;
+        
 
         newEntry.Display();
 
@@ -58,7 +57,7 @@ class Program
 
         Journal journal = new Journal();
         journal.AddEntry(newEntry);
-        //journal._entries.Add(newEntry);
+        //_entries.Add(newEntry);
 
         Console.WriteLine($"{journal._entries}");
 
@@ -91,7 +90,7 @@ class Program
 
       else if (menuChoice == 4)
       {   
-          Console.WriteLine("qual e o nome do arquivo? ");
+          Console.WriteLine("what is the name of the file? ");
           string nameOfTheFile = Console.ReadLine();
           Journal save = new Journal();
           save.SaveToFile(nameOfTheFile);

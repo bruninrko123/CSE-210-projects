@@ -10,7 +10,12 @@ public class Entry
 
     
 
-
+public Entry(string date, string promptText, string entryText)
+{
+    _date = date;
+    _promptText = promptText;
+    _entryText = entryText;
+}
    
     public void Display()
     {

@@ -17,7 +17,8 @@ public class Scripture
 
 
     public void displayScripture()
-    {
+    {   
+        Console.Clear();
         foreach (string w in _showScripture)
         {
             Console.Write(w + " ");
@@ -29,25 +30,39 @@ public class Scripture
 
     public void Hide()
     {   
+        string decision = "";
         int lenghtList = _showScripture.Count;
+        do{
+        Console.WriteLine("Press enter to continue or type 'quit' to finish ");
+        decision = Console.ReadLine();
+         
         ConsoleKeyInfo keyInfo = Console.ReadKey();
-        if (keyInfo.Key == ConsoleKey.Enter)
-        {
-            Random random = new Random();
-            int randomNumber = random.Next(0, lenghtList - 1);
 
-            string inputString = _showScripture[randomNumber];
-            int lenghtCharacter = inputString.Length;
-            _showScripture[randomNumber] = "";
+            if (keyInfo.Key == ConsoleKey.Enter)
+            {   
+                for (int g = 0; g < 3; g++)
+                {
+                    Random random = new Random();
+                    int randomNumber = random.Next(0, lenghtList - 1);
 
-            for (int i = 0; i < lenghtCharacter; i++)
-            {
-                _showScripture[randomNumber] += "_";
+                    string inputString = _showScripture[randomNumber];
+                    int lenghtCharacter = inputString.Length;
+                    _showScripture[randomNumber] = "";
+
+                    for (int i = 0; i < lenghtCharacter; i++)
+                    {
+                        _showScripture[randomNumber] += "_";
+                    }
+                }
+            displayScripture();
             }
+            }while (decision != "quit");
+    }
 
-        displayScripture();
 
-        }
+    public bool isFinished()
+    {
+        
     }
 
 
