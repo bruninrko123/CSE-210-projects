@@ -9,7 +9,10 @@ public class Entry
     public string _entryText;
 
     
-
+public Entry()
+{
+    
+}
 public Entry(string date, string promptText, string entryText)
 {
     _date = date;
@@ -19,7 +22,7 @@ public Entry(string date, string promptText, string entryText)
    
     public void Display()
     {
-       Console.WriteLine($"Date: {_date} -- {_promptText} \n {_entryText}" );
+       Console.WriteLine($"Date: {_date} -- {_promptText} \n{_entryText}" );
 
         return;
     }

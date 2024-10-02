@@ -2,15 +2,9 @@ using System.IO;
 
 public class PromptGenerator
 {
-    public List<string> _prompts = new List<string>() {"what name?", "What age?", "what color?", "what'sup?", "how far?"};
+    public List<string> _prompts = new List<string>() {"what was the favorite part of your day?", "did you eat anything special today?", "Who was the dearest person you met today?", "If you could change anything in you day what would it be?", "did anything stress you today?","How did you see the Lord's hand in your day?"};
 
-    //public void FillList()
-    //{
-        //_prompts.Add("What was your favorite part of the day?");
-        //_prompts.Add("What is your name?");
-       // _prompts.Add("What's up?");
-        //_prompts.Add("where are you?");
-    //}
+   
    
 
 
