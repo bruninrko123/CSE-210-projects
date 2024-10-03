@@ -1,70 +1,69 @@
 public class Scripture
 {
-    private List<string> _showScripture = new List<string>();
+    Reference _reference;
+    List<Word> _words = new List<Word>();
 
-    public Scripture()
+
+   public Scripture()
     {
-        string defaultScripture = "And it came to pass that I, Nephi, said unto my father: I will go and do the things which the Lord hath commanded, for I know that the Lord giveth no commandments unto the children of men, save he shall prepare a way for them that they may accomplish the thing which he commandeth them.";
 
-        string[] words = defaultScripture.Split(" ");
+    }
+
+    public Scripture(Reference reference, string text)
+    {
+        _reference = reference;
+        
+
+        string[] words = text.Split(" ");
+       
+
 
         foreach (string w in words)
-        {
-            _showScripture.Add(w);
+        {   
+            Word word = new Word(w);
+            _words.Add(word);
         }
+        
         
     }
 
+    public void HideRandomWords(int numberToHide)
+    {
+        int lengthList = _words.Count;
+         for (int g = 0; g < numberToHide; g++)
+        {   
 
-    public void displayScripture()
-    {   
-        Console.Clear();
-        foreach (string w in _showScripture)
-        {
-            Console.Write(w + " ");
+            Random random = new Random();
+            int randomNumber = random.Next(0, lengthList - 1);
+
+            _words[randomNumber].Hide();
+            
+
+            
+        }
+    }
+
+    public string GetDisplayText()
+    {   //display reference
+        Console.WriteLine(_reference.GetDisplayText());
+        //display scripture
+        foreach (Word w in _words)
+        {   
+            string singleWord = w.GetDisplayText();
+            Console.Write(singleWord + " ");
             
         }
         Console.WriteLine();
+        return _reference.GetDisplayText();
     }
+    
 
-
-    public void Hide()
-    {   
-        string decision = "";
-        int lenghtList = _showScripture.Count;
-        do{
-        Console.WriteLine("Press enter to continue or type 'quit' to finish ");
-        decision = Console.ReadLine();
-         
-        ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            if (keyInfo.Key == ConsoleKey.Enter)
-            {   
-                for (int g = 0; g < 3; g++)
-                {
-                    Random random = new Random();
-                    int randomNumber = random.Next(0, lenghtList - 1);
-
-                    string inputString = _showScripture[randomNumber];
-                    int lenghtCharacter = inputString.Length;
-                    _showScripture[randomNumber] = "";
-
-                    for (int i = 0; i < lenghtCharacter; i++)
-                    {
-                        _showScripture[randomNumber] += "_";
-                    }
-                }
-            displayScripture();
-            }
-            }while (decision != "quit");
-    }
-
-
-    public bool isFinished()
+    public bool isCompletlyHidden()
     {
-        
+        return false;
     }
+
+   
 
 
 }
-

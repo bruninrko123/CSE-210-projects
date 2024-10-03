@@ -4,25 +4,19 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop03 World!");
-
-        Reference r1 = new Reference();
-        r1.displayReference();
-        Scripture s1 = new Scripture();
-        s1.displayScripture();
-
-        Reference r2 = new Reference("John", "3", "17");
-        r2.displayReference();
-
-        Reference r3 = new Reference("Proverbs", "3", "5", "6");
-        r3.displayReference();
-
-        //define which scripture to use
-        Scripture scripture = new Scripture();
+        string scriptureText = "And it came to pass that I, Nephi, said unto my father: I will go and do the things which the Lord hath commanded, for I know that the Lord giveth no commandments unto the children of men, save he shall prepare a way for them that they may accomplish the thing which he commandeth them.";
 
 
-        Scripture hiding = new Scripture();
-        hiding.Hide();
+        Console.WriteLine("Hello World!");
+        Reference reference = new Reference();
+        Console.WriteLine(reference.GetDisplayText());
+
+        Scripture scripture = new Scripture(reference, scriptureText);
+        scripture.GetDisplayText();
+
+        scripture.HideRandomWords(3);
+
+        scripture.GetDisplayText();
 
 
     }
