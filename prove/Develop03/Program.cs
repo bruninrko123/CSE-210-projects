@@ -16,7 +16,15 @@ class Program
 
         //do the menu
         Console.WriteLine("Press Enter to continue or 'quit' to finish");
-         ConsoleKeyInfo keyInfo = Console.ReadKey();
+        string decision = "";
+        decision = Console.ReadLine();
+        if (decision == "quit")
+        {
+        
+        }
+        else if (decision == "")
+        {
+         //ConsoleKeyInfo keyInfo = Console.ReadKey();
         do{
            
                 Console.Clear();
@@ -26,15 +34,15 @@ class Program
                 scripture.GetDisplayText();
 
                 Console.WriteLine("Press Enter to continue or 'quit' to finish");
-                keyInfo = Console.ReadKey();
-                
+                //keyInfo = Console.ReadKey();
+                decision = Console.ReadLine();
                 
                 if(scripture.isCompletlyHidden() == true)
                 {
                     break;
                 }
 
-        }while(keyInfo.Key == ConsoleKey.Enter);
-
+        }while(decision == "");
+        }
     }
 }
