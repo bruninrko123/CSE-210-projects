@@ -1,7 +1,7 @@
 public class Scripture
 {
-    Reference _reference;
-    List<Word> _words = new List<Word>();
+    private Reference _reference;
+    private List<Word> _words = new List<Word>();
 
 
    public Scripture()

@@ -24,25 +24,25 @@ class Program
         }
         else if (decision == "")
         {
-         //ConsoleKeyInfo keyInfo = Console.ReadKey();
-        do{
-           
-                Console.Clear();
-           
-                scripture.HideRandomWords(3);
+         
+            do{
+            
+                    Console.Clear();
+            
+                    scripture.HideRandomWords(3);
 
-                scripture.GetDisplayText();
+                    scripture.GetDisplayText();
 
-                Console.WriteLine("Press Enter to continue or 'quit' to finish");
-                //keyInfo = Console.ReadKey();
-                decision = Console.ReadLine();
-                
-                if(scripture.isCompletlyHidden() == true)
-                {
-                    break;
-                }
+                    Console.WriteLine("Press Enter to continue or 'quit' to finish");
+                    //keyInfo = Console.ReadKey();
+                    decision = Console.ReadLine();
+                    
+                    if(scripture.isCompletlyHidden() == true)
+                    {
+                        break;
+                    }
 
-        }while(decision == "");
+            }while(decision == "");
         }
     }
 }
