@@ -37,15 +37,15 @@ public void Hide()
 
 public void Show()
 {
-
+    
 }
 
 public bool isHidden()
 {   
     char car1 = _text[0];
-    char car2 = _text[1];
+    //char car2 = _text[1];
     char hiddenChar = '_';
-    if (car1 == hiddenChar && car2 == hiddenChar)
+    if (car1 == hiddenChar)
     {
         return true;
     }

@@ -28,19 +28,29 @@ public class Scripture
     }
 
     public void HideRandomWords(int numberToHide)
-    {
+    {   
+        List<int> hiddenwords = new List<int>();
+        int hiddencounter = 0;
         int lengthList = _words.Count;
-         for (int g = 0; g < numberToHide; g++)
-        {   
-
+        do
+        {
+            
             Random random = new Random();
-            int randomNumber = random.Next(0, lengthList - 1);
+            int randomNumber = random.Next(0, lengthList);
+            if (_words[randomNumber].isHidden() == false)
+            {
+                hiddenwords.Add(randomNumber);
+                
+                hiddencounter++;
+            }
+        } while(hiddencounter < numberToHide);
 
-            _words[randomNumber].Hide();
+        for (int j = 0; j < hiddencounter; j++)
+            _words[hiddenwords[j]].Hide();
             
 
             
-        }
+       
     }
 
     public string GetDisplayText()
@@ -59,8 +69,29 @@ public class Scripture
     
 
     public bool isCompletlyHidden()
-    {
-        return false;
+    {   
+        int finishCounter = 0;
+        int lengthList = _words.Count;
+        for (int g = 0; g < lengthList; g++)
+        {   
+            if(_words[g].isHidden() == true)
+            {
+                finishCounter = finishCounter + 1;
+            }
+            Random random = new Random();
+            int randomNumber = random.Next(0, lengthList);
+
+        }
+
+        if (finishCounter >= lengthList)
+        {
+            return true;
+        }
+          
+        else
+        {
+            return false;
+        }
     }
 
    
