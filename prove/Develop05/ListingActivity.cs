@@ -26,7 +26,6 @@ public class ListingActivity : Activity
 
         Console.WriteLine("List as many responses as you can to the following prompt: ");
         string ThePrompt = GetRandomPrompt();
-        SavePromptIntoFile(ThePrompt);
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
 
@@ -40,16 +39,17 @@ public class ListingActivity : Activity
         }
         Console.WriteLine($"You listed {counter} items!\n");
         DisplayEndingMessage();
-        SaveUserListIntoFile(Listings);
+        SaveUserListIntoFile(Listings, ThePrompt);
     }
 
-    public void GetRandomPrompt()
+    public string GetRandomPrompt()
     {
         Random random = new Random();
         int randomNumber = random.Next(0, _prompts.Count - 1);
 
         string prompt = _prompts[randomNumber];
         Console.WriteLine($"---{prompt}---");
+        return prompt;
     }
 
     private List<string> GetListFromUser()
@@ -61,11 +61,14 @@ public class ListingActivity : Activity
         return _UserList;
     }
 
-    private void SaveUserListIntoFile(List<string> ListFromTheUser)
+    private void SaveUserListIntoFile(List<string> ListFromTheUser, string prompt)
     {   
         int index = 0;
         using (StreamWriter writer = new StreamWriter("Listings.txt"))
-        {
+        {   
+            writer.WriteLine($"Prompt: {prompt}");
+            writer.WriteLine();
+            
             foreach (string item in ListFromTheUser)
             {   
                 index++;
@@ -75,12 +78,12 @@ public class ListingActivity : Activity
         }
     }
 
-    private void SavePromptIntoFile(string prompt)
-    {
-        using(StreamWriter writer = new StreamWriter("Listings.txt"))
-        {
-            writer.WriteLine($"Prompt: {prompt}");
-            writer.WriteLine();
-        }
-    }
+    // private void SavePromptIntoFile(string prompt)
+    // {
+    //     using(StreamWriter writer = new StreamWriter("Listings.txt"))
+    //     {
+    //         writer.WriteLine($"Prompt: {prompt}");
+    //         writer.WriteLine();
+    //     }
+    // }
 }
