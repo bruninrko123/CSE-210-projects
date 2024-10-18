@@ -3,7 +3,7 @@ public class ListingActivity : Activity
 
     private int _count;
     private List<string> _prompts = new List<string>();
-
+    private List<string> _UserList = new List<string>();
 
     public ListingActivity()
     {
@@ -25,18 +25,22 @@ public class ListingActivity : Activity
         DisplayStartingMessage();
 
         Console.WriteLine("List as many responses as you can to the following prompt: ");
-        GetRandomPrompt();
+        string ThePrompt = GetRandomPrompt();
+        SavePromptIntoFile(ThePrompt);
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
 
+        List<string> Listings = new List<string>();
         int counter = 0;
         while (DateTime.Now < endTime)
         {
-            string response = Console.ReadLine();
+            Listings = GetListFromUser();
+            
             counter++;
         }
         Console.WriteLine($"You listed {counter} items!\n");
         DisplayEndingMessage();
+        SaveUserListIntoFile(Listings);
     }
 
     public void GetRandomPrompt()
@@ -48,9 +52,35 @@ public class ListingActivity : Activity
         Console.WriteLine($"---{prompt}---");
     }
 
-    public List<string> GetListFromUser()
+    private List<string> GetListFromUser()
     {
-        List<string> UserList = new List<string>();
-        return UserList;
+        
+
+        string response = Console.ReadLine();
+        _UserList.Add(response);
+        return _UserList;
+    }
+
+    private void SaveUserListIntoFile(List<string> ListFromTheUser)
+    {   
+        int index = 0;
+        using (StreamWriter writer = new StreamWriter("Listings.txt"))
+        {
+            foreach (string item in ListFromTheUser)
+            {   
+                index++;
+
+                writer.WriteLine($"{index}.{item}");
+            }
+        }
+    }
+
+    private void SavePromptIntoFile(string prompt)
+    {
+        using(StreamWriter writer = new StreamWriter("Listings.txt"))
+        {
+            writer.WriteLine($"Prompt: {prompt}");
+            writer.WriteLine();
+        }
     }
 }
