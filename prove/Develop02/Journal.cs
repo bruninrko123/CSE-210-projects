@@ -30,32 +30,33 @@ public class Journal
             foreach (Entry entry in _entries)
             {
                 entry.Display();
+                Console.WriteLine();
             }
         }
     }
  
     // Saves all entries to a file
-    public void SaveToFile(string filename)
+    public void SaveToFile()
     {
-        using (StreamWriter outputFile = new StreamWriter(filename))
+        using (StreamWriter outputFile = new StreamWriter("test.txt"))
         {
             foreach (Entry entry in _entries)
             {
-                outputFile.WriteLine($"{entry._date},{entry._promptText},{entry._entryText}");
+                outputFile.WriteLine($"{entry._date}|{entry._promptText}|{entry._entryText}");
             }
         }
-        Console.WriteLine($"Entries saved to {filename}.");
+        Console.WriteLine($"Entries saved to {"test.txt"}.");
     }
  
     // Loads entries from a file and adds them to the journal
-    public void LoadFromFile(string filename)
+    public void LoadFromFile()
     {   
         
-        string[] lines = File.ReadAllLines(filename);
+        string[] lines = File.ReadAllLines("test.txt");
 
         foreach (string line in lines)
         {   Console.WriteLine("here again");
-            string[] parts = line.Split(',');
+            string[] parts = line.Split('|');
  
             if (parts.Length > 1)
             {   
@@ -69,6 +70,6 @@ public class Journal
                 AddEntry(loadedEntry);
             }
         }
-        Console.WriteLine($"Entries loaded from {filename}.");
+        Console.WriteLine($"Entries loaded from {"test.txt"}.");
     }
 }

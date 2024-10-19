@@ -12,7 +12,7 @@ class Program
       //while
        while (menuChoice != 5)
        {
-
+        
         //doing the menu
         Console.WriteLine("1.Write");
         Console.WriteLine("2.Display");
@@ -74,10 +74,10 @@ class Program
 
       else if (menuChoice == 3)
       { 
-        Console.Write("What is the name of the fiel to read? ");
-        string fileToBeRead = Console.ReadLine();
+        // Console.Write("What is the name of the fiel to read? ");
+        // string fileToBeRead = Console.ReadLine();
         
-        journal.LoadFromFile(fileToBeRead);
+        journal.LoadFromFile();
         
       }
     
@@ -85,10 +85,10 @@ class Program
 
       else if (menuChoice == 4)
       {   
-          Console.WriteLine("what is the name of the file? ");
-          string nameOfTheFile = Console.ReadLine();
+          // Console.WriteLine("what is the name of the file? ");
+          // string nameOfTheFile = Console.ReadLine();
           
-          journal.SaveToFile(nameOfTheFile);
+          journal.SaveToFile();
       
 
 
