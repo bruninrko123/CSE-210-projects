@@ -3,25 +3,40 @@ public class SimpleGoal : Goal
     private bool _isComplete;
 
 
-    public SimpleGoal(string name, string description, int points) : base(name, description, points)
+    public SimpleGoal(string name, string description, string points) : base(name, description, points)
     {
-
+        _isComplete = false;
     }
 
     public override bool IsComplete()
     {
-        throw new NotImplementedException();
+        
+        return _isComplete;
     }
 
 
-    public override void RecordEvent()
+    public override string RecordEvent()
     {
-        throw new NotImplementedException();
+        if (_isComplete == false)
+        {
+            Console.WriteLine($"Congratulations! You have earned {_points} points");
+            _isComplete = true;
+            return _points;
+        }
+        
+        else 
+        {
+            Console.WriteLine("This is a simple, one time goal and you have already recorded it.");
+            return "0";
+        }
+        
+        
     }
 
     public override string GetStringRepresentation()
-    {
-        throw new NotImplementedException();
+    {   
+        string representation = $"Simple goal:{_name},{_description},{_points},{_isComplete}";
+        return representation;
     }
 
 

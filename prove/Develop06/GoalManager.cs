@@ -34,6 +34,28 @@ public class GoalManager
                 CreateGoal();
             }
 
+            if (decision == 2)
+            {
+                ListGoalDetails();
+            }
+
+            if (decision == 3)
+            {
+                SaveGoals();
+            }
+
+            if (decision == 4)
+            {
+                LoadGoals();
+            }
+
+            if (decision == 5)
+            {
+                RecordEvent();
+            }
+
+            
+
         } while (decision != 6);
 
         
@@ -45,13 +67,67 @@ public class GoalManager
     }
 
     public void ListGoalNames()
-    {
-        throw new NotImplementedException();
+    {   
+        int counter = 0;
+        foreach (Goal g in _goals)
+        {   
+            counter++;
+            string goaldetails = g.GetDetailsString();
+            string[] words = goaldetails.Split(',');
+            string name = words[0];
+            Console.WriteLine($"{counter}.{name}");
+        }
     }
 
     public void ListGoalDetails()
-    {
-        throw new NotImplementedException();
+    {   
+        foreach (Goal g in _goals)
+        {   
+            //declaring variables to use in the exeption
+            string target = "";
+            string completed = "";
+            
+            
+
+            //getting the details
+            string goaldetails = g.GetDetailsString();
+            
+            string[] words = goaldetails.Split(',');
+            string name = words[0];
+            string description = words[1];
+            string points = words[2];
+            string iscomplete = words[3];
+            Console.WriteLine(words[3]);
+            string brackets = "";
+            if (iscomplete == "False")
+            {
+                brackets = "[ ]";
+            }
+            else
+            {
+                brackets = "[x]";
+            }
+
+            // testing if it is a checklist goal
+            int wordCount = words.Length;
+
+            if (wordCount > 4)
+            {
+                target = words[4];
+                completed = words[5];
+                
+                Console.WriteLine($"{brackets} {name} ({description} -- Currently completed: {completed}/{target})");
+            }
+           
+           else
+           {
+                Console.WriteLine($"{brackets} {name} ({description})");
+            
+           }
+        
+            
+        }
+        
     }
 
     public void CreateGoal()
@@ -73,9 +149,9 @@ public class GoalManager
                 string goaldescription = Console.ReadLine();
                 Console.Write("What is the amount of points associated with this goal ");
                 string pointsNumber = Console.ReadLine();
-                int NumberOfPoints = int.Parse(pointsNumber);
+                // int NumberOfPoints = int.Parse(pointsNumber);
 
-                SimpleGoal simpleGoal = new SimpleGoal(goalname,goaldescription,NumberOfPoints);
+                SimpleGoal simpleGoal = new SimpleGoal(goalname,goaldescription,pointsNumber);
 
                 _goals.Add(simpleGoal);
 
@@ -89,9 +165,9 @@ public class GoalManager
                 string goaldescription = Console.ReadLine();
                 Console.Write("What is the amount of points associated with this goal ");
                 string pointsNumber = Console.ReadLine();
-                int NumberOfPoints = int.Parse(pointsNumber);
+                // int NumberOfPoints = int.Parse(pointsNumber);
 
-                EternalGoal eternalGoal = new EternalGoal(goalname,goaldescription,NumberOfPoints);
+                EternalGoal eternalGoal = new EternalGoal(goalname,goaldescription,pointsNumber);
 
                 _goals.Add(eternalGoal);
             }
@@ -104,7 +180,7 @@ public class GoalManager
                 string goaldescription = Console.ReadLine();
                 Console.Write("What is the amount of points associated with this goal ");
                 string pointsNumber = Console.ReadLine();
-                int NumberOfPoints = int.Parse(pointsNumber);
+                // int NumberOfPoints = int.Parse(pointsNumber);
                 Console.Write("How many time does this goal need to be accomplished for a bonus? ");
                 string howManyTimes = Console.ReadLine();
                 int timesForBonus = int.Parse(howManyTimes);
@@ -113,27 +189,65 @@ public class GoalManager
                 int bonusForXTimes = int.Parse(bonusget);
 
                 
-                ChecklistGoal checklistGoal = new ChecklistGoal(goalname,goaldescription,NumberOfPoints,timesForBonus,bonusForXTimes);
+                ChecklistGoal checklistGoal = new ChecklistGoal(goalname,goaldescription,pointsNumber,timesForBonus,bonusForXTimes);
                 _goals.Add(checklistGoal);
             }
     }
 
     public void RecordEvent()
     {
-        throw new NotImplementedException();
+        
+        Console.WriteLine("The goals are:");
+        ListGoalNames();
+        Console.Write("Which goal did you accomplish? ");
+        string accomplished = Console.ReadLine();
+        int accomplishedGoal = int.Parse(accomplished);
+        
+        string pointsToScore = _goals[accomplishedGoal - 1].RecordEvent();
+
+        int TimelyScore = int.Parse(pointsToScore);
+
+        _score += TimelyScore;
+
+        Console.WriteLine($"\nYou have {_score} points.");
+
+        
+
     }
 
     public void SaveGoals()
     {
-        throw new NotImplementedException();
+        using(StreamWriter writer = new StreamWriter("goals.txt"))
+        {
+            writer.WriteLine(_score);
+
+            foreach (Goal g in _goals)
+            {
+                writer.WriteLine(g.GetStringRepresentation());
+            }
+        }
     }
 
     public void LoadGoals()
-    {
-        throw new NotImplementedException();
+    {   
+        
+        using (StreamReader reader = new StreamReader("goals.txt"))
+        {
+
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                Console.WriteLine(line);
+            }
+        }
     }
 
 
+    // public Goal createGoalObject(string[] details)
+    // {
+    //     details.Split('','');
+    //     string name = details[0];
 
+    // }
 
 }
