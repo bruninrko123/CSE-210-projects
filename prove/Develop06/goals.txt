@@ -1,2 +1,2 @@
-0
-Simple goal:Find a nice place,Find a place and take her,200,False
+100
+Eternal goal|Smile|Smile every day|50|2|26/10/2024 22:54:48

@@ -16,6 +16,7 @@ public class GoalManager
     {   
         int decision = 0;
         do{
+            
             Console.WriteLine("Menu Options:");
             Console.WriteLine("  1.Create new goal");
             Console.WriteLine("  2.List goals");
@@ -166,8 +167,9 @@ public class GoalManager
                 Console.Write("What is the amount of points associated with this goal ");
                 string pointsNumber = Console.ReadLine();
                 // int NumberOfPoints = int.Parse(pointsNumber);
-
-                EternalGoal eternalGoal = new EternalGoal(goalname,goaldescription,pointsNumber);
+                int EternalCounter = 0;
+                DateTime lastTime = DateTime.Now;
+                EternalGoal eternalGoal = new EternalGoal(goalname,goaldescription,pointsNumber,EternalCounter,lastTime);
 
                 _goals.Add(eternalGoal);
             }
@@ -187,9 +189,9 @@ public class GoalManager
                 Console.Write("What is the bonus for accomplishing it that many times? ");
                 string bonusget = Console.ReadLine();
                 int bonusForXTimes = int.Parse(bonusget);
-
+                int amountCompleted = 0;
                 
-                ChecklistGoal checklistGoal = new ChecklistGoal(goalname,goaldescription,pointsNumber,timesForBonus,bonusForXTimes);
+                ChecklistGoal checklistGoal = new ChecklistGoal(goalname,goaldescription,pointsNumber,timesForBonus,amountCompleted,bonusForXTimes);
                 _goals.Add(checklistGoal);
             }
     }
@@ -233,11 +235,67 @@ public class GoalManager
         
         using (StreamReader reader = new StreamReader("goals.txt"))
         {
-
+            int counter = 0;
             string line;
             while ((line = reader.ReadLine()) != null)
             {
                 Console.WriteLine(line);
+                if (counter == 0)
+                {
+                    // string sc= reader.ReadLine();
+                    _score = int.Parse(line);
+                    
+                }
+                    
+                else
+                {
+                    //string sc = reader.ReadLine();
+                    string[] parts = line.Split('|');
+                    string goalType = parts[0];
+
+                    if (goalType == "Simple goal")
+                    {
+                        string name = parts[1];
+                        string description = parts[2];
+                        string points = parts[3];
+                        string isComplete = parts[4];
+
+                        SimpleGoal simpleGoal = new SimpleGoal(name,description,points);
+                        _goals.Add(simpleGoal);
+
+                    }
+
+                    else if (goalType == "Eternal goal")
+                    {
+                        string name = parts[1];
+                        string description = parts[2];
+                        string points = parts[3];
+                        string EternalTimescounter = parts[4];
+                        int intEternalCounter = int.Parse(EternalTimescounter);
+                        string lastTime = parts[5];
+                        DateTime lastTimeDate = DateTime.Parse(lastTime);
+                        EternalGoal eternalGoal = new EternalGoal(name,description,points,intEternalCounter,lastTimeDate);
+                        _goals.Add(eternalGoal);
+                    }
+
+                    else if (goalType == "Checklist goal")
+                    {
+                        string name = parts[1];
+                        string description = parts[2];
+                        string points = parts[3];
+                        string  target = parts[4];
+                        int intTarget = int.Parse(target);
+                        string amountCompleted = parts[5];
+                        int intamountCompleted = int.Parse(amountCompleted);
+                        string bonus = parts[6];
+                        int intBonus = int.Parse(bonus);
+
+                        ChecklistGoal checklistGoal = new ChecklistGoal(name,description,points,intTarget,intamountCompleted,intBonus);
+                        _goals.Add(checklistGoal);
+                    }
+                    
+                }
+                counter++;
             }
         }
     }
